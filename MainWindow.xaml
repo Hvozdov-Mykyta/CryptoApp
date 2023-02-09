@@ -17,7 +17,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Frame Name="MainFrame" NavigationUIVisibility="Hidden"/>
+        <Frame Name="MainFrame" Grid.Column="1" NavigationUIVisibility="Hidden"/>
 
         <StackPanel>
 
