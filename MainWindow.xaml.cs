@@ -24,5 +24,15 @@ namespace CryptoApp
         {
             InitializeComponent();
         }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void NavigationButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

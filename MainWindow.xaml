@@ -5,8 +5,35 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CryptoApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded">
     <Grid>
-        
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.25*"/>
+            <ColumnDefinition Width="0.75*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Frame Name="MainFrame" NavigationUIVisibility="Hidden"/>
+
+        <StackPanel>
+
+            <Button Name="HomeButton" Content="Home" Padding="0,20,0,20"
+                    FontFamily="Bahnschrift" FontSize="22"
+                    Click="NavigationButton_Click"/>
+
+            <Button Name="MarketButton" Content="Market" Padding="0,20,0,20"
+                    FontFamily="Bahnschrift" FontSize="22"
+                    Click="NavigationButton_Click"/>
+
+            <Button Name="ConverterButton" Content="Converter" Padding="0,20,0,20"
+                    FontFamily="Bahnschrift" FontSize="22"
+                    Click="NavigationButton_Click"/>
+
+        </StackPanel>
+
     </Grid>
 </Window>
