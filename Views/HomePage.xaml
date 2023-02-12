@@ -4,13 +4,25 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:conv="clr-namespace:CryptoApp.Converters"
-      xmlns:local="clr-namespace:CryptoApp"
+      xmlns:vm="clr-namespace:CryptoApp.ViewModels"
       mc:Ignorable="d"
       d:DesignHeight="{Binding Source={x:Static SystemParameters.PrimaryScreenHeight}, Converter={conv:RatioConverter}, ConverterParameter='0.5'}" 
       d:DesignWidth="{Binding Source={x:Static SystemParameters.PrimaryScreenWidth}, Converter={conv:RatioConverter}, ConverterParameter='0.375'}"
       Title="HomePage">
 
-    <Grid Background="#6B728E">
+    <Page.DataContext>
+        <vm:HomePageViewModel/>
+    </Page.DataContext>
+
+    <Page.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="Margin" Value="5,5,5,0"/>
+            <Setter Property="FontSize" Value="25"/>
+            <Setter Property="FontFamily" Value="Bahnschrift"/>
+        </Style>
+    </Page.Resources>
+
+    <Grid>
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -20,7 +32,28 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <TextBlock Text="HOME" FontFamily="Bahnschrift" FontSize="22" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <ListBox Name="AssetsListBox" ItemsSource="{Binding Coins}" SelectedItem="{Binding SelectedCoin}" Background="#6B728E" Padding="10" HorizontalContentAlignment="Stretch" ScrollViewer.CanContentScroll="False">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Margin="0,2,0,2" Background="#50577A">
+                        
+                        <StackPanel.Resources>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Margin" Value="10,0,0,5"/>
+                                <Setter Property="FontFamily" Value="Bahnschrift"/>
+                                <Setter Property="Foreground" Value="AntiqueWhite"/>
+                            </Style>
+                        </StackPanel.Resources>
+
+                        <TextBlock FontSize="25" Text="{Binding Path=name}"/>
+                        <TextBlock FontSize="15" Text="{Binding Path=rank, StringFormat='Rank : {0}'}"/>
+                        <TextBlock FontSize="15" Text="{Binding Path=symbol, StringFormat='Symbol : {0}'}"/>
+                        <TextBlock FontSize="15" Text="{Binding Path=priceUsd, StringFormat='Price (USD) : {0}'}"/>
+                    
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
 
     </Grid>
 </Page>
