@@ -9,7 +9,7 @@
         Width="{Binding Source={x:Static SystemParameters.PrimaryScreenWidth}, Converter={conv:RatioConverter}, ConverterParameter='0.5'}"
         WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
-        Title="MainWindow" Loaded="Window_Loaded">
+        Title="MainWindow" Loaded="Window_Loaded" ResizeMode="NoResize">
 
     <Grid>
 

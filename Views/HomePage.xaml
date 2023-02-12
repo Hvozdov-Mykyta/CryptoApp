@@ -14,25 +14,20 @@
         <vm:HomePageViewModel/>
     </Page.DataContext>
 
-    <Page.Resources>
-        <Style TargetType="TextBlock">
-            <Setter Property="Margin" Value="5,5,5,0"/>
-            <Setter Property="FontSize" Value="25"/>
-            <Setter Property="FontFamily" Value="Bahnschrift"/>
-        </Style>
-    </Page.Resources>
-
     <Grid>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-
         <Grid.RowDefinitions>
-            <RowDefinition/>
+            <RowDefinition Height="0.2*"/>
+            <RowDefinition Height="0.8*"/>
         </Grid.RowDefinitions>
 
-        <ListBox Name="AssetsListBox" ItemsSource="{Binding Coins}" SelectedItem="{Binding SelectedCoin}" Background="#6B728E" Padding="10" HorizontalContentAlignment="Stretch" ScrollViewer.CanContentScroll="False">
+        <StackPanel Background="#404258" Orientation="Horizontal">
+            <Button Content="Refresh" Margin="15,15,0,15" FontFamily="Bahnschrift" FontSize="18" BorderThickness="0" Background="#50577A" Foreground="PaleVioletRed" Padding="15,10,15,10" Command="{Binding CoinsUpdate}"/>
+        </StackPanel>
+
+        <ListBox ItemsSource="{Binding Coins}" SelectedItem="{Binding SelectedCoin}" 
+                 Background="#6B728E" Padding="10,5,10,10" HorizontalContentAlignment="Stretch" 
+                 ScrollViewer.CanContentScroll="False" Grid.Row="1" BorderThickness="0">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Margin="0,2,0,2" Background="#50577A">
@@ -45,7 +40,7 @@
                             </Style>
                         </StackPanel.Resources>
 
-                        <TextBlock FontSize="25" Text="{Binding Path=name}"/>
+                        <TextBlock FontSize="22" Text="{Binding Path=name}"/>
                         <TextBlock FontSize="15" Text="{Binding Path=rank, StringFormat='Rank : {0}'}"/>
                         <TextBlock FontSize="15" Text="{Binding Path=symbol, StringFormat='Symbol : {0}'}"/>
                         <TextBlock FontSize="15" Text="{Binding Path=priceUsd, StringFormat='Price (USD) : {0}'}"/>
