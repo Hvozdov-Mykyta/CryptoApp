@@ -105,11 +105,13 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Commands\AppCloser.cs" />
     <Compile Include="Commands\CoinsUpdater.cs" />
     <Compile Include="Converters\RatioConverter.cs" />
     <Compile Include="Models\Coin.cs" />
     <Compile Include="Models\HttpRequests.cs" />
     <Compile Include="ViewModels\HomePageViewModel.cs" />
+    <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="Views\ConverterPage.xaml.cs">
       <DependentUpon>ConverterPage.xaml</DependentUpon>
     </Compile>

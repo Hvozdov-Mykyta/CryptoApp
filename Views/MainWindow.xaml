@@ -5,12 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:conv="clr-namespace:CryptoApp.Converters"
         xmlns:local="clr-namespace:CryptoApp"
+        xmlns:vm="clr-namespace:CryptoApp.ViewModels"
         Height="{Binding Source={x:Static SystemParameters.PrimaryScreenHeight}, Converter={conv:RatioConverter}, ConverterParameter='0.5'}"
         Width="{Binding Source={x:Static SystemParameters.PrimaryScreenWidth}, Converter={conv:RatioConverter}, ConverterParameter='0.5'}"
         WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
-        Title="MainWindow" Loaded="Window_Loaded" ResizeMode="NoResize">
+        WindowStyle="None" Loaded="Window_Loaded" ResizeMode="NoResize">
 
+    <Window.DataContext>
+        <vm:MainWindowViewModel/>
+    </Window.DataContext>
+    
     <Grid>
 
         <Grid.ColumnDefinitions>
@@ -29,7 +34,7 @@
                     <Setter Property="Padding" Value="20"/>
                     <Setter Property="FontFamily" Value="Bahnschrift"/>
                     <Setter Property="FontSize" Value="22"/>
-                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="Foreground" Value="AntiqueWhite"/>
                     <Setter Property="Background" Value="#50577A"/>
                 </Style>
             </StackPanel.Resources>
@@ -44,6 +49,11 @@
                     Click="NavigationButton_Click"/>
 
         </StackPanel>
+
+        <Button Content="Close" FontFamily="Bahnschrift" FontSize="22"
+                Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
+                Padding="15" Background="IndianRed" Foreground="AntiqueWhite"
+                Command="{Binding CloseApp}"/>
 
     </Grid>
 </Window>
