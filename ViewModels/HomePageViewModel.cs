@@ -1,13 +1,12 @@
-﻿using System;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
+﻿using System.Runtime.CompilerServices;
 using System.Collections.Generic;
-using CryptoApp.Models;
-using System.Net.Http;
-using Newtonsoft.Json;
 using System.Threading.Tasks;
-using System.Text.Json.Serialization;
+using System.ComponentModel;
+using System.Windows.Input;
 using System.Linq;
+using Newtonsoft.Json;
+using CryptoApp.Models;
+using CryptoApp.Commands;
 
 namespace CryptoApp.ViewModels
 {
@@ -47,16 +46,32 @@ namespace CryptoApp.ViewModels
         {
             Task<string> getTask = http_requests.GetAllAssets();
             string json = await getTask;
-            IntermediateCoinsList InterCoinsList = JsonConvert.DeserializeObject<IntermediateCoinsList>(json);
-            this.Coins = InterCoinsList.data.Take(10).ToList();
+            Coins = JsonConvert.DeserializeObject<IntermediateCoinsList>(json).data.Take(10).ToList();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
+        public void OnPropertyChanged([CallerMemberName] string property = "")
         {
             if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
+                PropertyChanged(this, new PropertyChangedEventArgs(property));
         }
+
+        private ICommand _coinsUpdater;
+        public ICommand CoinsUpdate
+        {
+            get
+            {
+                if (_coinsUpdater == null)
+                    _coinsUpdater = new CoinsUpdater(this);
+                return _coinsUpdater;
+            }
+            set
+            {
+                _coinsUpdater = value;
+            }
+        }
+
+
 
         private class IntermediateCoinsList
         {
