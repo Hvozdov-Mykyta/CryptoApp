@@ -89,6 +89,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Views\CoinPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ConverterPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -106,14 +110,19 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Commands\AppCloser.cs" />
+    <Compile Include="Commands\CoinPageOpener.cs" />
     <Compile Include="Commands\CoinsUpdater.cs" />
     <Compile Include="Commands\FrameUpdater.cs" />
     <Compile Include="Converters\RatioConverter.cs" />
     <Compile Include="Interfaces\IPage.cs" />
     <Compile Include="Models\Coin.cs" />
     <Compile Include="Models\HttpRequests.cs" />
+    <Compile Include="ViewModels\CoinPageViewModel.cs" />
     <Compile Include="ViewModels\HomePageViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="Views\CoinPage.xaml.cs">
+      <DependentUpon>CoinPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ConverterPage.xaml.cs">
       <DependentUpon>ConverterPage.xaml</DependentUpon>
     </Compile>

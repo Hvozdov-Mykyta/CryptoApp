@@ -8,7 +8,7 @@
       mc:Ignorable="d"
       d:DesignHeight="{Binding Source={x:Static SystemParameters.PrimaryScreenHeight}, Converter={conv:RatioConverter}, ConverterParameter='0.5'}" 
       d:DesignWidth="{Binding Source={x:Static SystemParameters.PrimaryScreenWidth}, Converter={conv:RatioConverter}, ConverterParameter='0.375'}"
-      Title="HomePage">
+      >
 
     <Page.DataContext>
         <vm:HomePageViewModel/>
@@ -36,11 +36,11 @@
             </StackPanel.Resources>
             
             <Button Content="Refresh" Command="{Binding CoinsUpdate}"/>
-            <Button Content="VIew Selected"/>
+            <Button Content="View Selected" Command="{Binding CoinPageOpen}" CommandParameter="{Binding ElementName=CoinsListBox, Path=SelectedItem}"/>
 
         </StackPanel>
 
-        <ListBox ItemsSource="{Binding Coins}" SelectedItem="{Binding SelectedCoin}" 
+        <ListBox Name="CoinsListBox" ItemsSource="{Binding Coins}" SelectedItem="{Binding SelectedCoin}" 
                  Background="#6B728E" Padding="10,5,10,10" HorizontalContentAlignment="Stretch" 
                  ScrollViewer.CanContentScroll="False" Grid.Row="1" BorderThickness="0">
             <ListBox.ItemTemplate>

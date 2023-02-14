@@ -1,4 +1,6 @@
-﻿namespace CryptoApp.Models
+﻿using System;
+
+namespace CryptoApp.Models
 {
     internal class Coin
     {

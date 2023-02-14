@@ -52,10 +52,7 @@ namespace CryptoApp.ViewModels
                     _coinsUpdater = new CoinsUpdater(this);
                 return _coinsUpdater;
             }
-            set
-            {
-                _coinsUpdater = value;
-            }
+            set { _coinsUpdater = value; }
         }
 
         public async void UpdateCoinsList()
@@ -63,6 +60,24 @@ namespace CryptoApp.ViewModels
             Task<string> getTask = http_requests.GetAllAssets();
             string json = await getTask;
             Coins = JsonConvert.DeserializeObject<IntermediateCoinsList>(json).data.Take(10).ToList();
+        }
+
+
+        private ICommand _coinPageOpener;
+        public ICommand CoinPageOpen
+        {
+            get
+            {
+                if(_coinPageOpener == null)
+                    _coinPageOpener= new CoinPageOpener(this);
+                return _coinPageOpener;
+            }
+            set { _coinPageOpener = value; }
+        }
+
+        public void ViewSelectedCoin()
+        {
+            ((MainWindowViewModel)App.Current.MainWindow.DataContext).SetCoinPage(_selectedCoin);
         }
 
 

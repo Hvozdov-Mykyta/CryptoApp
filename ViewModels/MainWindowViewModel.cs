@@ -1,8 +1,10 @@
 ﻿using CryptoApp.Commands;
 using CryptoApp.Interfaces;
+using CryptoApp.Views;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
+using CryptoApp.Models;
 
 namespace CryptoApp.ViewModels
 {
@@ -11,12 +13,14 @@ namespace CryptoApp.ViewModels
         private HomePage _homePage;
         private MarketPage _marketPage;
         private ConverterPage _converterPage;
+        private CoinPage _coinPage;
 
         public MainWindowViewModel()
         {
             _homePage = new HomePage();
             _marketPage = new MarketPage();   
             _converterPage = new ConverterPage();
+            _coinPage = new CoinPage();
             SelectedPage = _homePage;
         }
 
@@ -67,6 +71,13 @@ namespace CryptoApp.ViewModels
                 default:
                     return;
             }
+        }
+
+        public void SetCoinPage(Coin actualCoin)
+        {
+            SelectedPage = _coinPage;
+            CoinPageViewModel coinPageVM = (CoinPageViewModel)_coinPage.DataContext;
+            coinPageVM.ActualCoin = actualCoin;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
