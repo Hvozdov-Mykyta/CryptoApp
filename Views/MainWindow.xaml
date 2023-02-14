@@ -10,7 +10,7 @@
         Width="{Binding Source={x:Static SystemParameters.PrimaryScreenWidth}, Converter={conv:RatioConverter}, ConverterParameter='0.5'}"
         WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
-        WindowStyle="None" Loaded="Window_Loaded" ResizeMode="NoResize">
+        WindowStyle="None" ResizeMode="NoResize">
 
     <Window.DataContext>
         <vm:MainWindowViewModel/>
@@ -23,7 +23,7 @@
             <ColumnDefinition Width="0.75*"/>
         </Grid.ColumnDefinitions>
 
-        <Frame Name="MainFrame" Grid.Column="1" NavigationUIVisibility="Hidden"/>
+        <Frame Name="MainFrame" Grid.Column="1" NavigationUIVisibility="Hidden" Content="{Binding SelectedPage}"/>
 
         <StackPanel Grid.Column="0" Background="#404258">
 
@@ -40,13 +40,16 @@
             </StackPanel.Resources>
 
             <Button Name="HomeButton" Content="Home"
-                    Click="NavigationButton_Click"/>
+                    Command="{Binding FrameUpdate}"
+                    CommandParameter="{Binding ElementName=HomeButton, Path=Content}"/>
 
             <Button Name="MarketButton" Content="Market"
-                    Click="NavigationButton_Click"/>
+                    Command="{Binding FrameUpdate}"
+                    CommandParameter="{Binding ElementName=MarketButton, Path=Content}"/>
 
             <Button Name="ConverterButton" Content="Converter"
-                    Click="NavigationButton_Click"/>
+                    Command="{Binding FrameUpdate}"
+                    CommandParameter="{Binding ElementName=ConverterButton, Path=Content}"/>
 
         </StackPanel>
 

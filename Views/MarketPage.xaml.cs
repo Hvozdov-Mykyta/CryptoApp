@@ -11,14 +11,14 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
+using CryptoApp.Interfaces;
 
 namespace CryptoApp
 {
     /// <summary>
     /// Interaction logic for MarketPage.xaml
     /// </summary>
-    public partial class MarketPage : Page
+    public partial class MarketPage : Page, IPage
     {
         public MarketPage()
         {

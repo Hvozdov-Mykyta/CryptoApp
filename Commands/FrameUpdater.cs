@@ -1,22 +1,25 @@
 ﻿using CryptoApp.ViewModels;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Windows.Input;
+using System.Windows.Controls;
 
 namespace CryptoApp.Commands
 {
-    internal class CoinsUpdater : ICommand
+    internal class FrameUpdater : ICommand
     {
-        private HomePageViewModel homePageVM;
+        private MainWindowViewModel _mainWindowViewModel;
 
-        public CoinsUpdater(HomePageViewModel homePageVM)
+        public FrameUpdater(MainWindowViewModel mainWindowVM)
         {
-            this.homePageVM = homePageVM;
+            _mainWindowViewModel = mainWindowVM;
         }
 
-        
         public bool CanExecute(object parameter)
         {
-            return true;
+            return !String.IsNullOrEmpty(parameter as string);
         }
 
         public event EventHandler CanExecuteChanged
@@ -27,7 +30,7 @@ namespace CryptoApp.Commands
 
         public void Execute(object parameter)
         {
-            homePageVM.UpdateCoinsList();
+            _mainWindowViewModel.SetSelectedPage(parameter as string);
         }
     }
 }

@@ -107,7 +107,9 @@
     </Compile>
     <Compile Include="Commands\AppCloser.cs" />
     <Compile Include="Commands\CoinsUpdater.cs" />
+    <Compile Include="Commands\FrameUpdater.cs" />
     <Compile Include="Converters\RatioConverter.cs" />
+    <Compile Include="Interfaces\IPage.cs" />
     <Compile Include="Models\Coin.cs" />
     <Compile Include="Models\HttpRequests.cs" />
     <Compile Include="ViewModels\HomePageViewModel.cs" />
