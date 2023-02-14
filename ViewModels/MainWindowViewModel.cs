@@ -53,6 +53,7 @@ namespace CryptoApp.ViewModels
             set { _appCloser = value; }
         }
 
+
         public void SetSelectedPage(string pageName)
         {
             switch (pageName)

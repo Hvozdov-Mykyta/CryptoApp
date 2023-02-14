@@ -17,6 +17,7 @@ namespace CryptoApp.Commands
             _mainWindowViewModel = mainWindowVM;
         }
 
+
         public bool CanExecute(object parameter)
         {
             return !String.IsNullOrEmpty(parameter as string);

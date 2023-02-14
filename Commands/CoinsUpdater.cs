@@ -1,6 +1,6 @@
-﻿using CryptoApp.ViewModels;
-using System;
+﻿using System;
 using System.Windows.Input;
+using CryptoApp.ViewModels;
 
 namespace CryptoApp.Commands
 {

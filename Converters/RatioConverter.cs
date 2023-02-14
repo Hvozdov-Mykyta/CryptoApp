@@ -13,7 +13,7 @@ namespace CryptoApp.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             double size = System.Convert.ToDouble(value) * System.Convert.ToDouble(parameter, CultureInfo.InvariantCulture);
-            return size.ToString("G0", CultureInfo.InvariantCulture);
+            return size.ToString();
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

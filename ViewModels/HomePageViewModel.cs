@@ -20,6 +20,7 @@ namespace CryptoApp.ViewModels
             UpdateCoinsList();
         }
 
+
         private List<Coin> _coins;
         public List<Coin> Coins 
         { 
@@ -42,20 +43,6 @@ namespace CryptoApp.ViewModels
             }
         }
 
-        public async void UpdateCoinsList()
-        {
-            Task<string> getTask = http_requests.GetAllAssets();
-            string json = await getTask;
-            Coins = JsonConvert.DeserializeObject<IntermediateCoinsList>(json).data.Take(10).ToList();
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName] string property = "")
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(property));
-        }
-
         private ICommand _coinsUpdater;
         public ICommand CoinsUpdate
         {
@@ -71,6 +58,20 @@ namespace CryptoApp.ViewModels
             }
         }
 
+        public async void UpdateCoinsList()
+        {
+            Task<string> getTask = http_requests.GetAllAssets();
+            string json = await getTask;
+            Coins = JsonConvert.DeserializeObject<IntermediateCoinsList>(json).data.Take(10).ToList();
+        }
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged([CallerMemberName] string property = "")
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(property));
+        }
 
 
         private class IntermediateCoinsList
