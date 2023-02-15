@@ -8,9 +8,9 @@ namespace CryptoApp.Commands
 {
     internal class CoinPageOpener : ICommand
     {
-        private ICoinsPage _coinsPageVM;
+        private ICoinsPageViewSelected _coinsPageVM;
 
-        public CoinPageOpener(ICoinsPage coinsPageVM)
+        public CoinPageOpener(ICoinsPageViewSelected coinsPageVM)
         {
             _coinsPageVM = coinsPageVM;
         }

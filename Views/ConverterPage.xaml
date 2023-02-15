@@ -4,23 +4,120 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:conv="clr-namespace:CryptoApp.Converters"
-      xmlns:local="clr-namespace:CryptoApp"
+      xmlns:vm="clr-namespace:CryptoApp.ViewModels"
       mc:Ignorable="d"
       d:DesignHeight="{Binding Source={x:Static SystemParameters.PrimaryScreenHeight}, Converter={conv:RatioConverter}, ConverterParameter='0.5'}" 
       d:DesignWidth="{Binding Source={x:Static SystemParameters.PrimaryScreenWidth}, Converter={conv:RatioConverter}, ConverterParameter='0.375'}"
       Title="ConverterPage">
 
+    <Page.DataContext>
+        <vm:ConverterPageViewModel/>
+    </Page.DataContext>
+    
+    <Page.Resources>
+        <Style x:Key="ComboBoxBase" TargetType="ComboBox">
+            <Setter Property="FontFamily" Value="Bahnscrift"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Margin" Value="15"/>
+            <Setter Property="Background" Value="#50577A"/>
+            <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
+        </Style>
+
+        <Style x:Key="TextBlockBase" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Bahnschrift"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Foreground" Value="AntiqueWhite"/>
+            <Setter Property="Margin" Value="15,5"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="10,5"/>
+        </Style>
+
+        <Style x:Key="TextBoxBase" TargetType="TextBox">
+            <Setter Property="FontFamily" Value="Bahnschrift"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Margin" Value="15,0,15,15"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="10,5"/>
+        </Style>
+
+        <Style x:Key="ButtonBase" TargetType="Button">
+            <Setter Property="FontFamily" Value="Bahnschrift"/>
+            <Setter Property="FontSize" Value="22"/>
+            <Setter Property="Background" Value="#404258"/>
+            <Setter Property="Foreground" Value="IndianRed"/>
+            <Setter Property="Margin" Value="10,10,5,10"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="15"/>
+        </Style>
+    </Page.Resources>
+    
     <Grid Background="#6B728E">
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="6*"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Text="CONVERTER" FontFamily="Bahnschrift" FontSize="22" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <ComboBox Style="{StaticResource ComboBoxBase}" ItemsSource="{Binding Coins}" DisplayMemberPath="name"
+                  SelectedItem="{Binding FirstCoin, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+        <ComboBox Style="{StaticResource ComboBoxBase}" ItemsSource="{Binding Coins}" DisplayMemberPath="name"
+                  SelectedItem="{Binding SecondCoin, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1"/>
+
+
+        <StackPanel Grid.Row="1" Background="#404258" Margin="15" VerticalAlignment="Top">
+
+            <Grid Grid.Row="1">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="Coin Price" Style="{StaticResource TextBlockBase}"/>
+                <TextBlock Text="{Binding FirstCoin.priceUsd, StringFormat='$ {0}'}" 
+                           Style="{StaticResource TextBlockBase}" Grid.Column="1"/>
+
+            </Grid>
+            
+            <TextBlock Text="Coins Number" Style="{StaticResource TextBlockBase}"/>
+            <TextBox Style="{StaticResource TextBoxBase}" 
+                     Text="{Binding FirstCoinCount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Grid.Column="1" Background="#404258" Margin="15" VerticalAlignment="Top">
+
+            <Grid Grid.Row="1">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="Coin Price" Style="{StaticResource TextBlockBase}"/>
+                <TextBlock Text="{Binding SecondCoin.priceUsd, StringFormat='$ {0}'}" 
+                           Style="{StaticResource TextBlockBase}" Grid.Column="1"/>
+
+            </Grid>
+
+            <TextBlock Text="Coins Number" Style="{StaticResource TextBlockBase}"/>
+            <TextBox Style="{StaticResource TextBoxBase}" 
+                     Text="{Binding SecondCoinCount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" VerticalAlignment="bottom" Orientation="Horizontal" Margin="15">
+            <Button Content="Refresh" Style="{StaticResource ButtonBase}" Command="{Binding CoinsListUpdater}"/>
+            <Button Content="Convert" Style="{StaticResource ButtonBase}" Command="{Binding CoinsConverter}"/>
+        </StackPanel>
 
     </Grid>
 </Page>

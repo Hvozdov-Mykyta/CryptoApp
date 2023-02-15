@@ -1,20 +1,20 @@
 ﻿using System;
 using System.Windows.Input;
-using CryptoApp.Interfaces;
+using CryptoApp.ViewModels;
 
 
 namespace CryptoApp.Commands
 {
-    internal class CoinsListUpdater : ICommand
+    internal class CoinsConverter : ICommand
     {
-        private ICoinsPageUpdate _coinsPageVM;
+        private ConverterPageViewModel _converterPageVM;
 
-        public CoinsListUpdater(ICoinsPageUpdate coinsPageVM)
+        public CoinsConverter(ConverterPageViewModel converterPageVM)
         {
-            _coinsPageVM = coinsPageVM;
+            _converterPageVM = converterPageVM;
         }
 
-        
+
         public bool CanExecute(object parameter)
         {
             return true;
@@ -28,7 +28,7 @@ namespace CryptoApp.Commands
 
         public void Execute(object parameter)
         {
-            _coinsPageVM.UpdateCoinsList();
+            _converterPageVM.ConvertCoins();
         }
     }
 }

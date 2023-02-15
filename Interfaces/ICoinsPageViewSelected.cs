@@ -1,8 +1,7 @@
 ﻿namespace CryptoApp.Interfaces
 {
-    internal interface ICoinsPage
+    internal interface ICoinsPageViewSelected
     {
-        void UpdateCoinsList();
         void ViewSelectedCoin();
     }
 }

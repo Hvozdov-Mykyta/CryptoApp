@@ -11,7 +11,7 @@ using CryptoApp.Interfaces;
 
 namespace CryptoApp.ViewModels
 {
-    internal class HomePageViewModel : INotifyPropertyChanged, ICoinsPage
+    internal class HomePageViewModel : INotifyPropertyChanged, ICoinsPageUpdate, ICoinsPageViewSelected
     {
         private HttpRequests _httpRequests;
 
@@ -23,38 +23,48 @@ namespace CryptoApp.ViewModels
 
 
         private List<Coin> _coins;
-        public List<Coin> Coins 
-        { 
+        public List<Coin> Coins { 
             get { return _coins; }
-            set
-            {
+            set {
                 _coins = value;
                 OnPropertyChanged("Coins");
             }
         }
 
         private Coin _selectedCoin;
-        public Coin SelectedCoin
-        {
+        public Coin SelectedCoin {
             get { return _selectedCoin; }
-            set
-            {
+            set {
                 _selectedCoin = value;
                 OnPropertyChanged("SelectedCoin");
             }
         }
 
+
+
         private ICommand _coinsUpdater;
-        public ICommand CoinsUpdate
-        {
-            get
-            {
+        public ICommand CoinsUpdate {
+            get {
                 if (_coinsUpdater == null)
                     _coinsUpdater = new CoinsListUpdater(this);
                 return _coinsUpdater;
             }
             set { _coinsUpdater = value; }
         }
+
+        private ICommand _coinPageOpener;
+        public ICommand CoinPageOpen
+        {
+            get
+            {
+                if (_coinPageOpener == null)
+                    _coinPageOpener = new CoinPageOpener(this);
+                return _coinPageOpener;
+            }
+            set { _coinPageOpener = value; }
+        }
+
+
 
         public async void UpdateCoinsList()
         {
@@ -63,23 +73,11 @@ namespace CryptoApp.ViewModels
             Coins = JsonConvert.DeserializeObject<IntermediateCoinsList>(json).data.Take(10).ToList();
         }
 
-
-        private ICommand _coinPageOpener;
-        public ICommand CoinPageOpen
-        {
-            get
-            {
-                if(_coinPageOpener == null)
-                    _coinPageOpener= new CoinPageOpener(this);
-                return _coinPageOpener;
-            }
-            set { _coinPageOpener = value; }
-        }
-
         public void ViewSelectedCoin()
         {
             ((MainWindowViewModel)App.Current.MainWindow.DataContext).SetCoinPage(_selectedCoin);
         }
+
 
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -88,6 +86,7 @@ namespace CryptoApp.ViewModels
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(property));
         }
+
 
 
         private class IntermediateCoinsList

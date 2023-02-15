@@ -11,7 +11,7 @@ using Newtonsoft.Json;
 
 namespace CryptoApp.ViewModels
 {
-    internal class CoinsPageViewModel : INotifyPropertyChanged, ICoinsPage
+    internal class CoinsPageViewModel : INotifyPropertyChanged, ICoinsPageUpdate, ICoinsPageViewSelected
     {
         private HttpRequests _httpRequests;
 
