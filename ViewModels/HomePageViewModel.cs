@@ -12,11 +12,11 @@ namespace CryptoApp.ViewModels
 {
     internal class HomePageViewModel : INotifyPropertyChanged
     {
-        private HttpRequests http_requests;
+        private HttpRequests _httpRequests;
 
         public HomePageViewModel() 
         {
-            http_requests = new HttpRequests();
+            _httpRequests = new HttpRequests();
             UpdateCoinsList();
         }
 
@@ -57,7 +57,7 @@ namespace CryptoApp.ViewModels
 
         public async void UpdateCoinsList()
         {
-            Task<string> getTask = http_requests.GetAllAssets();
+            Task<string> getTask = _httpRequests.GetAllAssets();
             string json = await getTask;
             Coins = JsonConvert.DeserializeObject<IntermediateCoinsList>(json).data.Take(10).ToList();
         }

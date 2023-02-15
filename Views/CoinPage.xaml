@@ -20,13 +20,29 @@
             <Setter Property="Foreground" Value="AntiqueWhite"/>
             <Setter Property="FontFamily" Value="Bahnschrift"/>
         </Style>
-        
+
+        <Style x:Key="TextBlockInfo" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Margin" Value="3"/>
+        </Style>
+
+        <Style x:Key="ButtonBase" TargetType="Button">
+            <Setter Property="FontFamily" Value="Bahnschrift"/>
+            <Setter Property="FontSize" Value="22"/>
+            <Setter Property="Background" Value="#50577A"/>
+            <Setter Property="Foreground" Value="PaleVioletRed"/>
+            <Setter Property="VerticalAlignment" Value="Bottom"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Padding" Value="15"/>
+        </Style>
+
     </Page.Resources>
 
     <Grid Background="#6B728E">
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1.5*"/>
+            <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
 
@@ -39,22 +55,103 @@
         <TextBlock Text="{Binding ActualCoin.name}" Style="{StaticResource TextBlockBase}" FontSize="22" Padding="15" Background="#404258"/>
         <TextBlock Text="Markets" FontFamily="Bahnschrift" FontSize="22" Foreground="AntiqueWhite" Padding="15" Grid.Column="1" Background="#404258"/>
 
+        <Grid Grid.Row="1" Margin="15">
 
-        <StackPanel Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
 
-            <StackPanel.Resources>
-                <Style TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
-                    <Setter Property="FontSize" Value="18"/>
-                    <Setter Property="Margin" Value="3"/>
-                </Style>
-            </StackPanel.Resources>
+            <StackPanel>
 
-            <TextBlock Text="{Binding ActualCoin.rank, StringFormat='Rank            {0}'}"/>
+                <StackPanel.Resources>
+                    <Style TargetType="TextBlock" BasedOn="{StaticResource TextBlockInfo}"/>
+                </StackPanel.Resources>
 
-            <TextBlock Text="{Binding ActualCoin.symbol, StringFormat='Symbol        {0}'}"/>
-            
-            <TextBlock Text="{Binding ActualCoin.priceUsd, StringFormat='Price            $ {0}'}"/>
+                <TextBlock Text="Rank" Grid.Column="0"/>
+                <TextBlock Text="Symbol" Grid.Column="0"/>
+                <TextBlock Text="Price" Grid.Column="1"/>
+                <TextBlock Text="Change (24h)" Grid.Column="1"/>
+                <TextBlock/>
+                <TextBlock Text="Supply"/>
+                <TextBlock Text="Total issued"/>
+                <TextBlock/>
+                <TextBlock Text="Volume (24h)"/>
 
-        </StackPanel>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1">
+
+                <StackPanel.Resources>
+                    <Style TargetType="TextBlock" BasedOn="{StaticResource TextBlockInfo}"/>
+                </StackPanel.Resources>
+
+                <TextBlock Text="{Binding ActualCoin.rank}" Grid.Column="0"/>
+                <TextBlock Text="{Binding ActualCoin.symbol}" Grid.Column="0"/>
+                <TextBlock Text="{Binding ActualCoin.priceUsd}" Grid.Column="1"/>
+                <TextBlock Text="{Binding ActualCoin.changePercent24Hr}" Grid.Column="1"/>
+
+                <TextBlock/>
+
+                <TextBlock Text="{Binding ActualCoin.supply}"/>
+                <TextBlock Text="{Binding ActualCoin.maxSupply}"/>
+
+                <TextBlock/>
+
+                <TextBlock Text="{Binding ActualCoin.volumeUsd24Hr}"/>
+
+            </StackPanel>
+
+        </Grid>
+
+        <Button Content="Refresh" Command="{Binding CoinUpdate}" Style="{StaticResource ButtonBase}"
+                Grid.Row="1"/>
+
+        <ListBox ItemsSource="{Binding CoinMarkets}" Background="#6B728E" BorderThickness="0"
+                 Grid.Row="1" Grid.Column="1" Padding="3"
+                 HorizontalContentAlignment="Stretch" ScrollViewer.CanContentScroll="False"
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Margin="0,2,0,2" Background="#50577A">
+
+                        <StackPanel.Resources>
+                            <Style TargetType="TextBlock" BasedOn="{StaticResource TextBlockInfo}">
+                                <Setter Property="Margin" Value="10,0,0,5"/>
+                            </Style>
+                        </StackPanel.Resources>
+
+                        <TextBlock FontSize="22" Text="{Binding Path=exchangeId}"/>
+
+                        <Grid>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Grid.Column="0">
+                                <TextBlock Text="Base ID"/>
+                                <TextBlock Text="Price"/>
+                                <TextBlock Text="Volume (24h)"/>
+                                <TextBlock Text="Volume percent"/>
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="1">
+                                <TextBlock Text="{Binding Path=baseSymbol}"/>
+                                <TextBlock Text="{Binding Path=priceUsd, StringFormat='$ {0}'}"/>
+                                <TextBlock Text="{Binding Path=volumeUsd24Hr}"/>
+                                <TextBlock Text="{Binding Path=volumePercent, StringFormat='{}{0} %'}"/>
+                            </StackPanel>
+
+                        </Grid>
+
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+
+        </ListBox>
+
     </Grid>
 </Page>

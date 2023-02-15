@@ -78,6 +78,7 @@ namespace CryptoApp.ViewModels
             SelectedPage = _coinPage;
             CoinPageViewModel coinPageVM = (CoinPageViewModel)_coinPage.DataContext;
             coinPageVM.ActualCoin = actualCoin;
+            coinPageVM.LoadMarketsList();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
