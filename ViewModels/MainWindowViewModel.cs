@@ -11,14 +11,14 @@ namespace CryptoApp.ViewModels
     internal class MainWindowViewModel : INotifyPropertyChanged
     {
         private HomePage _homePage;
-        private MarketPage _marketPage;
+        private CoinsPage _coinsPage;
         private ConverterPage _converterPage;
         private CoinPage _coinPage;
 
         public MainWindowViewModel()
         {
             _homePage = new HomePage();
-            _marketPage = new MarketPage();   
+            _coinsPage = new CoinsPage();   
             _converterPage = new ConverterPage();
             _coinPage = new CoinPage();
             SelectedPage = _homePage;
@@ -64,8 +64,8 @@ namespace CryptoApp.ViewModels
             {
                 case "Home":
                     SelectedPage = _homePage; break;
-                case "Market":
-                    SelectedPage = _marketPage; break;
+                case "Coins":
+                    SelectedPage = _coinsPage; break;
                 case "Converter":
                     SelectedPage = _converterPage; break;
                 default:

@@ -1,21 +1,24 @@
-﻿using System.Runtime.CompilerServices;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.ComponentModel;
-using System.Windows.Input;
-using System.Linq;
-using Newtonsoft.Json;
+﻿using CryptoApp.Commands;
 using CryptoApp.Models;
-using CryptoApp.Commands;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.ComponentModel;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Input;
 using CryptoApp.Interfaces;
 
 namespace CryptoApp.ViewModels
 {
-    internal class HomePageViewModel : INotifyPropertyChanged, ICoinsPage
+    internal class CoinsPageViewModel : INotifyPropertyChanged, ICoinsPage
     {
         private HttpRequests _httpRequests;
 
-        public HomePageViewModel() 
+        public CoinsPageViewModel()
         {
             _httpRequests = new HttpRequests();
             UpdateCoinsList();
@@ -23,8 +26,8 @@ namespace CryptoApp.ViewModels
 
 
         private List<Coin> _coins;
-        public List<Coin> Coins 
-        { 
+        public List<Coin> Coins
+        {
             get { return _coins; }
             set
             {
@@ -60,7 +63,7 @@ namespace CryptoApp.ViewModels
         {
             Task<string> getTask = _httpRequests.GetAllAssets();
             string json = await getTask;
-            Coins = JsonConvert.DeserializeObject<IntermediateCoinsList>(json).data.Take(10).ToList();
+            Coins = JsonConvert.DeserializeObject<IntermediateCoinsList>(json).data;
         }
 
 
@@ -69,8 +72,8 @@ namespace CryptoApp.ViewModels
         {
             get
             {
-                if(_coinPageOpener == null)
-                    _coinPageOpener= new CoinPageOpener(this);
+                if (_coinPageOpener == null)
+                    _coinPageOpener = new CoinPageOpener(this);
                 return _coinPageOpener;
             }
             set { _coinPageOpener = value; }

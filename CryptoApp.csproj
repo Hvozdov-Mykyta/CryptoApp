@@ -115,11 +115,13 @@
     <Compile Include="Commands\CoinsUpdater.cs" />
     <Compile Include="Commands\FrameUpdater.cs" />
     <Compile Include="Converters\RatioConverter.cs" />
+    <Compile Include="Interfaces\ICoinsPage.cs" />
     <Compile Include="Interfaces\IPage.cs" />
     <Compile Include="Models\Coin.cs" />
     <Compile Include="Models\HttpRequests.cs" />
     <Compile Include="Models\Market.cs" />
     <Compile Include="ViewModels\CoinPageViewModel.cs" />
+    <Compile Include="ViewModels\CoinsPageViewModel.cs" />
     <Compile Include="ViewModels\HomePageViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="Views\CoinPage.xaml.cs">
@@ -135,14 +137,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\MarketPage.xaml">
+    <Page Include="Views\CoinsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Views\MarketPage.xaml.cs">
-      <DependentUpon>MarketPage.xaml</DependentUpon>
+    <Compile Include="Views\CoinsPage.xaml.cs">
+      <DependentUpon>CoinsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

@@ -49,9 +49,9 @@
                     Command="{Binding FrameUpdate}"
                     CommandParameter="{Binding ElementName=HomeButton, Path=Content}"/>
 
-            <Button Name="MarketButton" Content="Market"
+            <Button Name="CoinsButton" Content="Coins"
                     Command="{Binding FrameUpdate}"
-                    CommandParameter="{Binding ElementName=MarketButton, Path=Content}"/>
+                    CommandParameter="{Binding ElementName=CoinsButton, Path=Content}"/>
 
             <Button Name="ConverterButton" Content="Converter"
                     Command="{Binding FrameUpdate}"

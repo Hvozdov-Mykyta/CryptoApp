@@ -1,21 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
+using CryptoApp.Interfaces;
 using CryptoApp.Models;
-using CryptoApp.ViewModels;
 
 namespace CryptoApp.Commands
 {
     internal class CoinPageOpener : ICommand
     {
-        private HomePageViewModel _homePageViewModel;
+        private ICoinsPage _coinsPageVM;
 
-        public CoinPageOpener(HomePageViewModel homePageViewModel)
+        public CoinPageOpener(ICoinsPage coinsPageVM)
         {
-            _homePageViewModel = homePageViewModel;
+            _coinsPageVM = coinsPageVM;
         }
 
 
@@ -32,7 +28,7 @@ namespace CryptoApp.Commands
 
         public void Execute(object parameter)
         {
-            _homePageViewModel.ViewSelectedCoin();
+            _coinsPageVM.ViewSelectedCoin();
         }
     }
 }
