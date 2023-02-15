@@ -120,6 +120,11 @@ namespace CryptoApp.ViewModels
                     MessageBox.Show(ex.Message);
                     return;
                 }
+                if (firstCoinCount < 0)
+                {
+                    MessageBox.Show("Coin count cant be less than 0");
+                    return;
+                }
                 double firstCoinPrice = double.Parse(FirstCoin.priceUsd.Replace(',', '.'), CultureInfo.InvariantCulture);
                 double SecondCoinPrice = double.Parse(SecondCoin.priceUsd.Replace(',', '.'), CultureInfo.InvariantCulture);
                 SecondCoinCount = (firstCoinCount * firstCoinPrice / SecondCoinPrice).ToString();
