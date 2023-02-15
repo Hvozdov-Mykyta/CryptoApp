@@ -31,6 +31,14 @@
             <Setter Property="Foreground" Value="AntiqueWhite"/>
             <Setter Property="Margin" Value="10,0,0,5"/>
         </Style>
+
+        <Style x:Key="ListBoxBase" TargetType="ListBox">
+            <Setter Property="Background" Value="#6B728E"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="ScrollViewer.CanContentScroll" Value="False"/>
+        </Style>
     </Page.Resources>
 
     <Grid>
@@ -47,13 +55,13 @@
             </StackPanel.Resources>
             
             <Button Content="Refresh" Command="{Binding CoinsUpdate}"/>
-            <Button Content="View Selected" Command="{Binding CoinPageOpen}" CommandParameter="{Binding ElementName=CoinsListBox, Path=SelectedItem}"/>
+            <Button Content="View Selected" Command="{Binding CoinPageOpen}" 
+                    CommandParameter="{Binding ElementName=CoinsListBox, Path=SelectedItem}"/>
 
         </StackPanel>
 
         <ListBox Name="CoinsListBox" ItemsSource="{Binding Coins}" SelectedItem="{Binding SelectedCoin}" 
-                 Background="#6B728E" Padding="10,5,10,10" BorderThickness="0" Grid.Row="1"
-                 ScrollViewer.CanContentScroll="False" HorizontalContentAlignment="Stretch">
+                 Style="{StaticResource ListBoxBase}" Grid.Row="1">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Margin="0,2,0,2" Background="#50577A">

@@ -1,6 +1,7 @@
 ﻿using System.Net.Http;
 using System.Threading.Tasks;
 
+
 namespace CryptoApp.Models
 {
     internal class HttpRequests
@@ -10,29 +11,23 @@ namespace CryptoApp.Models
 
         public async Task<string> GetAllAssets()
         {
-            HttpClient client = new HttpClient();
-
-            var returnMessage = await client.GetStringAsync(_allAssetsUrl);
-
-            return returnMessage;
+            return await MakeRestRequest(_allAssetsUrl);
         }
 
         public async Task<string> GetAllCoinMarkets(string coinId)
         {
-            HttpClient client = new HttpClient();
-
-            var returnMessage = await client.GetStringAsync(_allAssetsUrl + "/" + coinId + "/markets");
-
-            return returnMessage;
+            return await MakeRestRequest(_allAssetsUrl + "/" + coinId + "/markets");
         }
 
         public async Task<string> GetOneCoin(string coinId)
         {
+            return await MakeRestRequest(_allAssetsUrl + "/" + coinId);
+        }
+
+        private async Task<string> MakeRestRequest(string url)
+        {
             HttpClient client = new HttpClient();
-
-            var returnMessage = await client.GetStringAsync(_allAssetsUrl + "/" + coinId);
-
-            return returnMessage;
+            return await client.GetStringAsync(url);
         }
     }
 }

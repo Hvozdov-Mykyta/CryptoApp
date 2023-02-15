@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 
+
 namespace CryptoApp
 {
     public partial class MainWindow : Window

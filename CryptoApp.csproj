@@ -112,7 +112,7 @@
     <Compile Include="Commands\AppCloser.cs" />
     <Compile Include="Commands\CoinPageOpener.cs" />
     <Compile Include="Commands\CoinPageUpdater.cs" />
-    <Compile Include="Commands\CoinsUpdater.cs" />
+    <Compile Include="Commands\CoinsListUpdater.cs" />
     <Compile Include="Commands\FrameUpdater.cs" />
     <Compile Include="Converters\RatioConverter.cs" />
     <Compile Include="Interfaces\ICoinsPage.cs" />

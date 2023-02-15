@@ -26,6 +26,12 @@
             <Setter Property="Margin" Value="3"/>
         </Style>
 
+        <Style x:Key="TextBlockTitle" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+            <Setter Property="FontSize" Value="22"/>
+            <Setter Property="Padding" Value="15"/>
+            <Setter Property="Background" Value="#404258"/>
+        </Style>
+
         <Style x:Key="ButtonBase" TargetType="Button">
             <Setter Property="FontFamily" Value="Bahnschrift"/>
             <Setter Property="FontSize" Value="22"/>
@@ -35,6 +41,15 @@
             <Setter Property="HorizontalAlignment" Value="Left"/>
             <Setter Property="Margin" Value="5"/>
             <Setter Property="Padding" Value="15"/>
+        </Style>
+
+        <Style x:Key="ListBoxBase" TargetType="ListBox">
+            <Setter Property="Background" Value="#6B728E"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="3"/>
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
         </Style>
 
     </Page.Resources>
@@ -52,8 +67,8 @@
         </Grid.RowDefinitions>
 
 
-        <TextBlock Text="{Binding ActualCoin.name}" Style="{StaticResource TextBlockBase}" FontSize="22" Padding="15" Background="#404258"/>
-        <TextBlock Text="Markets" FontFamily="Bahnschrift" FontSize="22" Foreground="AntiqueWhite" Padding="15" Grid.Column="1" Background="#404258"/>
+        <TextBlock Text="{Binding ActualCoin.name}" Style="{StaticResource TextBlockTitle}"/>
+        <TextBlock Text="Markets" Grid.Column="1" Style="{StaticResource TextBlockTitle}"/>
 
         <Grid Grid.Row="1" Margin="15">
 
@@ -107,10 +122,8 @@
         <Button Content="Refresh" Command="{Binding CoinUpdate}" Style="{StaticResource ButtonBase}"
                 Grid.Row="1"/>
 
-        <ListBox ItemsSource="{Binding CoinMarkets}" Background="#6B728E" BorderThickness="0"
-                 Grid.Row="1" Grid.Column="1" Padding="3"
-                 HorizontalContentAlignment="Stretch" ScrollViewer.CanContentScroll="False"
-                 ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+        <ListBox ItemsSource="{Binding CoinMarkets}" Style="{StaticResource ListBoxBase}"
+                 Grid.Row="1" Grid.Column="1">
 
             <ListBox.ItemTemplate>
                 <DataTemplate>

@@ -50,7 +50,7 @@ namespace CryptoApp.ViewModels
             get
             {
                 if (_coinsUpdater == null)
-                    _coinsUpdater = new CoinsUpdater(this);
+                    _coinsUpdater = new CoinsListUpdater(this);
                 return _coinsUpdater;
             }
             set { _coinsUpdater = value; }

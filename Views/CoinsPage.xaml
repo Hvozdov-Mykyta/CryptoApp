@@ -4,7 +4,6 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:conv="clr-namespace:CryptoApp.Converters"
-      xmlns:local="clr-namespace:CryptoApp"
       xmlns:vm="clr-namespace:CryptoApp.ViewModels"
       mc:Ignorable="d"
       d:DesignHeight="{Binding Source={x:Static SystemParameters.PrimaryScreenHeight}, Converter={conv:RatioConverter}, ConverterParameter='0.5'}" 
@@ -32,6 +31,23 @@
             <Setter Property="Foreground" Value="AntiqueWhite"/>
             <Setter Property="Margin" Value="10,0,0,5"/>
         </Style>
+
+        <Style x:Key="TextBoxBase" TargetType="TextBox">
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="FontFamily" Value="Bahnschrift"/>
+            <Setter Property="FontSize" Value="22"/>
+            <Setter Property="Margin" Value="25"/>
+        </Style>
+
+        <Style x:Key="ListBoxBase" TargetType="ListBox">
+            <Setter Property="Background" Value="#6B728E"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="ScrollViewer.CanContentScroll" Value="False"/>
+        </Style>
     </Page.Resources>
 
     <Grid>
@@ -41,20 +57,32 @@
             <RowDefinition Height="0.8*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Background="#404258" Orientation="Horizontal">
+        <Grid Grid.Row="0" Background="#404258">
 
-            <StackPanel.Resources>
-                <Style TargetType="Button" BasedOn="{StaticResource ButtonBase}"/>
-            </StackPanel.Resources>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
 
-            <Button Content="Refresh" Command="{Binding CoinsUpdate}"/>
-            <Button Content="View Selected" Command="{Binding CoinPageOpen}" CommandParameter="{Binding ElementName=CoinsListBox, Path=SelectedItem}"/>
+            <StackPanel Orientation="Horizontal" Grid.Column="0">
 
-        </StackPanel>
+                <StackPanel.Resources>
+                    <Style TargetType="Button" BasedOn="{StaticResource ButtonBase}"/>
+                </StackPanel.Resources>
 
-        <ListBox Name="CoinsListBox" ItemsSource="{Binding Coins}" SelectedItem="{Binding SelectedCoin}" 
-                 Background="#6B728E" Padding="10,5,10,10" BorderThickness="0" Grid.Row="1"
-                 ScrollViewer.CanContentScroll="False" HorizontalContentAlignment="Stretch">
+                <Button Content="Refresh" Command="{Binding CoinsUpdate}"/>
+                <Button Content="View Selected" Command="{Binding CoinPageOpen}" 
+                        CommandParameter="{Binding ElementName=CoinsListBox, Path=SelectedItem}"/>
+
+            </StackPanel>
+
+            <TextBox Name="SearchTextBox" Style="{StaticResource TextBoxBase}" Grid.Column="1"
+                     Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+        </Grid>
+
+        <ListBox Name="CoinsListBox" ItemsSource="{Binding FilteredCoins}" SelectedItem="{Binding SelectedCoin}" 
+                 Grid.Row="1" Style="{StaticResource ListBoxBase}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Margin="0,2,0,2" Background="#50577A">

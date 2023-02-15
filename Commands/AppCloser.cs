@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
+
 namespace CryptoApp.Commands
 {
     internal class AppCloser : ICommand
@@ -18,7 +19,7 @@ namespace CryptoApp.Commands
 
         public void Execute(object parameter)
         {
-            App.Current.MainWindow.Close();
+            App.Current.Shutdown();
         }
     }
 }

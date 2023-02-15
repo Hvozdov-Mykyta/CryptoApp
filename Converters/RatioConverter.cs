@@ -3,12 +3,13 @@ using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Markup;
 
+
 namespace CryptoApp.Converters
 {
     [ValueConversion(typeof(string), typeof(string))]
     public class RatioConverter : MarkupExtension, IValueConverter
     {
-        private static RatioConverter _instance;
+        private static RatioConverter _ratio;
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -23,7 +24,7 @@ namespace CryptoApp.Converters
 
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
-            return _instance ?? (_instance = new RatioConverter());
+            return _ratio ?? (_ratio = new RatioConverter());
         }
 
     }

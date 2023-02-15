@@ -1,16 +1,13 @@
-﻿using CryptoApp.Commands;
+﻿using System.Runtime.CompilerServices;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Windows.Input;
+using System.Linq;
+using CryptoApp.Interfaces;
+using CryptoApp.Commands;
 using CryptoApp.Models;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using CryptoApp.Interfaces;
+
 
 namespace CryptoApp.ViewModels
 {
@@ -25,27 +22,47 @@ namespace CryptoApp.ViewModels
         }
 
 
+
         private List<Coin> _coins;
-        public List<Coin> Coins
-        {
+        public List<Coin> Coins {
             get { return _coins; }
-            set
-            {
+            set {
                 _coins = value;
                 OnPropertyChanged("Coins");
             }
         }
 
-        private Coin _selectedCoin;
-        public Coin SelectedCoin
+        private List<Coin> _filteredCoins;
+        public List<Coin> FilteredCoins
         {
+            get { return _filteredCoins; }
+            set {
+                _filteredCoins = value;
+                OnPropertyChanged("FilteredCoins");
+            }
+        }
+
+        private Coin _selectedCoin;
+        public Coin SelectedCoin {
             get { return _selectedCoin; }
-            set
-            {
+            set {
                 _selectedCoin = value;
                 OnPropertyChanged("SelectedCoin");
             }
         }
+
+        private string _searchText;
+        public string SearchText
+        {
+            get { return _searchText; }
+            set {
+                 _searchText = value;
+                 FilterCoinsList();
+                 OnPropertyChanged("SearchText");
+            }
+        }
+
+
 
         private ICommand _coinsUpdater;
         public ICommand CoinsUpdate
@@ -53,19 +70,11 @@ namespace CryptoApp.ViewModels
             get
             {
                 if (_coinsUpdater == null)
-                    _coinsUpdater = new CoinsUpdater(this);
+                    _coinsUpdater = new CoinsListUpdater(this);
                 return _coinsUpdater;
             }
             set { _coinsUpdater = value; }
         }
-
-        public async void UpdateCoinsList()
-        {
-            Task<string> getTask = _httpRequests.GetAllAssets();
-            string json = await getTask;
-            Coins = JsonConvert.DeserializeObject<IntermediateCoinsList>(json).data;
-        }
-
 
         private ICommand _coinPageOpener;
         public ICommand CoinPageOpen
@@ -79,10 +88,26 @@ namespace CryptoApp.ViewModels
             set { _coinPageOpener = value; }
         }
 
+
+
+        public async void UpdateCoinsList()
+        {
+            string json = await _httpRequests.GetAllAssets();
+            FilteredCoins = Coins = JsonConvert.DeserializeObject<IntermediateCoinsList>(json).data;
+            SearchText = "";
+        }
+
         public void ViewSelectedCoin()
         {
-            ((MainWindowViewModel)App.Current.MainWindow.DataContext).SetCoinPage(_selectedCoin);
+            ((MainWindowViewModel)App.Current.MainWindow.DataContext).SetCoinPage(SelectedCoin);
         }
+
+        public void FilterCoinsList()
+        {
+            string searchText = SearchText.ToLower();
+            FilteredCoins = Coins.Where(coin => coin.name.ToLower().Contains(searchText) || coin.symbol.ToLower().Contains(searchText)).ToList();
+        }
+
 
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -91,6 +116,7 @@ namespace CryptoApp.ViewModels
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(property));
         }
+
 
 
         private class IntermediateCoinsList

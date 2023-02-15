@@ -2,13 +2,14 @@
 using System.Windows.Input;
 using CryptoApp.Interfaces;
 
+
 namespace CryptoApp.Commands
 {
-    internal class CoinsUpdater : ICommand
+    internal class CoinsListUpdater : ICommand
     {
         private ICoinsPage _coinsPageVM;
 
-        public CoinsUpdater(ICoinsPage coinsPageVM)
+        public CoinsListUpdater(ICoinsPage coinsPageVM)
         {
             _coinsPageVM = coinsPageVM;
         }

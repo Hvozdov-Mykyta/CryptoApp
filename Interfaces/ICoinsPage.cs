@@ -3,7 +3,6 @@
     internal interface ICoinsPage
     {
         void UpdateCoinsList();
-
         void ViewSelectedCoin();
     }
 }

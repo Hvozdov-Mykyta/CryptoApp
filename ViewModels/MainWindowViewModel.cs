@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using CryptoApp.Models;
 
+
 namespace CryptoApp.ViewModels
 {
     internal class MainWindowViewModel : INotifyPropertyChanged
@@ -25,6 +26,7 @@ namespace CryptoApp.ViewModels
         }
 
 
+
         private IPage _selectedPage;
         public IPage SelectedPage 
         { 
@@ -34,6 +36,8 @@ namespace CryptoApp.ViewModels
                 OnPropertyChanged("SelectedPage");
             } 
         }
+
+
 
         private ICommand _frameUpdater;
         public ICommand FrameUpdate
@@ -58,6 +62,7 @@ namespace CryptoApp.ViewModels
         }
 
 
+
         public void SetSelectedPage(string pageName)
         {
             switch (pageName)
@@ -68,8 +73,6 @@ namespace CryptoApp.ViewModels
                     SelectedPage = _coinsPage; break;
                 case "Converter":
                     SelectedPage = _converterPage; break;
-                default:
-                    return;
             }
         }
 
@@ -80,6 +83,8 @@ namespace CryptoApp.ViewModels
             coinPageVM.ActualCoin = actualCoin;
             coinPageVM.LoadMarketsList();
         }
+
+
 
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string property = "")

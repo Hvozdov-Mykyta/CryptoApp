@@ -3,6 +3,7 @@ using System.Windows.Input;
 using CryptoApp.Interfaces;
 using CryptoApp.Models;
 
+
 namespace CryptoApp.Commands
 {
     internal class CoinPageOpener : ICommand

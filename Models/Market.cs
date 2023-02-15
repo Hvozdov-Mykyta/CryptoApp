@@ -1,6 +1,7 @@
 ﻿using System.Globalization;
 using System;
 
+
 namespace CryptoApp.Models
 {
     internal class Market

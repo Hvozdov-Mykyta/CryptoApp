@@ -1,11 +1,11 @@
-﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
+﻿using System.Runtime.CompilerServices;
 using System.Collections.Generic;
-using CryptoApp.Models;
-using Newtonsoft.Json;
+using System.ComponentModel;
 using System.Windows.Input;
+using CryptoApp.Models;
 using CryptoApp.Commands;
+using Newtonsoft.Json;
+
 
 namespace CryptoApp.ViewModels
 {
@@ -19,12 +19,13 @@ namespace CryptoApp.ViewModels
         }
 
 
-        private Coin _coin;
+
+        private Coin _actualCoin;
         public Coin ActualCoin 
         {
-            get { return _coin; }
+            get { return _actualCoin; }
             set {
-                _coin = value;
+                _actualCoin = value;
                 OnPropertyChanged("ActualCoin");
             }
         }
@@ -39,6 +40,8 @@ namespace CryptoApp.ViewModels
             }
         }
 
+
+
         private ICommand _coinUpdater;
         public ICommand CoinUpdate
         {
@@ -51,19 +54,21 @@ namespace CryptoApp.ViewModels
             set { _coinUpdater = value; }
         }
 
+
+
         public async void UpdateActualCoin()
         {
-            Task<string> getTask = _httpRequests.GetOneCoin(ActualCoin.id);
-            string json = await getTask;
+            string json = await _httpRequests.GetOneCoin(ActualCoin.id);
             ActualCoin = JsonConvert.DeserializeObject<IntermediateCoinClass>(json).data;
         }
 
         public async void LoadMarketsList()
         {
-            Task<string> getTask = _httpRequests.GetAllCoinMarkets(ActualCoin.id);
-            string json = await getTask;
+            string json = await _httpRequests.GetAllCoinMarkets(ActualCoin.id);
             CoinMarkets = JsonConvert.DeserializeObject<IntermediateMarketsList>(json).data;
         }
+
+
 
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string property = "")
@@ -71,7 +76,6 @@ namespace CryptoApp.ViewModels
             if(PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(property));
         }
-
 
 
 

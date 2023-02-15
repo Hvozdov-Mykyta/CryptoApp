@@ -1,6 +1,4 @@
 ﻿namespace CryptoApp.Interfaces
 {
-    internal interface IPage
-    {
-    }
+    internal interface IPage { }
 }

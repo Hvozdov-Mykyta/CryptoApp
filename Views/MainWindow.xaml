@@ -4,13 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:conv="clr-namespace:CryptoApp.Converters"
-        xmlns:local="clr-namespace:CryptoApp"
         xmlns:vm="clr-namespace:CryptoApp.ViewModels"
         Height="{Binding Source={x:Static SystemParameters.PrimaryScreenHeight}, Converter={conv:RatioConverter}, ConverterParameter='0.5'}"
         Width="{Binding Source={x:Static SystemParameters.PrimaryScreenWidth}, Converter={conv:RatioConverter}, ConverterParameter='0.5'}"
         WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
-        WindowStyle="None" ResizeMode="NoResize" 
+        WindowStyle="None" 
+        ResizeMode="NoResize" 
         MouseLeftButtonDown="Window_MouseLeftButtonDown">
 
     <Window.DataContext>
@@ -25,6 +25,18 @@
             <Setter Property="FontSize" Value="22"/>
             <Setter Property="Foreground" Value="AntiqueWhite"/>
         </Style>
+
+        <Style x:Key="ButtonNavigation" TargetType="Button" BasedOn="{StaticResource ButtonBase}">
+            <Setter Property="Margin" Value="4,4,4,0"/>
+            <Setter Property="Background" Value="#50577A"/>
+        </Style>
+
+        <Style x:Key="ButtonClose" TargetType="Button" BasedOn="{StaticResource ButtonBase}">
+            <Setter Property="Margin" Value="4"/>
+            <Setter Property="Background" Value="IndianRed"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Bottom"/>
+        </Style>
     </Window.Resources>
     
     <Grid>
@@ -34,15 +46,12 @@
             <ColumnDefinition Width="0.75*"/>
         </Grid.ColumnDefinitions>
 
-        <Frame Name="MainFrame" Grid.Column="1" NavigationUIVisibility="Hidden" Content="{Binding SelectedPage}"/>
+        <Frame Grid.Column="1" NavigationUIVisibility="Hidden" Content="{Binding SelectedPage}"/>
 
         <StackPanel Grid.Column="0" Background="#404258">
 
             <StackPanel.Resources>
-                <Style TargetType="Button" BasedOn="{StaticResource ButtonBase}">
-                    <Setter Property="Margin" Value="4,4,4,0"/>
-                    <Setter Property="Background" Value="#50577A"/>
-                </Style>
+                <Style TargetType="Button" BasedOn="{StaticResource ButtonNavigation}"/>
             </StackPanel.Resources>
 
             <Button Name="HomeButton" Content="Home"
@@ -59,9 +68,7 @@
 
         </StackPanel>
 
-        <Button Content="Close" Style="{StaticResource ButtonBase}" Background="IndianRed"
-                Margin="4" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" 
-                Command="{Binding CloseApp}"/>
+        <Button Content="Close" Style="{StaticResource ButtonClose}" Command="{Binding CloseApp}"/>
 
     </Grid>
 </Window>
