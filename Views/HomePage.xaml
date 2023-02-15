@@ -14,6 +14,25 @@
         <vm:HomePageViewModel/>
     </Page.DataContext>
 
+    <Page.Resources>
+        <Style x:Key="ButtonBase" TargetType="Button">
+            <Setter Property="Margin" Value="15,15,0,15"/>
+            <Setter Property="FontFamily" Value="Bahnschrift"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Background" Value="#50577A"/>
+            <Setter Property="Foreground" Value="PaleVioletRed"/>
+            <Setter Property="Padding" Value="15,10,15,10"/>
+        </Style>
+
+        <Style x:Key="TextBlockBase" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Bahnschrift"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Foreground" Value="AntiqueWhite"/>
+            <Setter Property="Margin" Value="10,0,0,5"/>
+        </Style>
+    </Page.Resources>
+
     <Grid>
 
         <Grid.RowDefinitions>
@@ -24,15 +43,7 @@
         <StackPanel Background="#404258" Orientation="Horizontal">
 
             <StackPanel.Resources>
-                <Style TargetType="Button">
-                    <Setter Property="Margin" Value="15,15,0,15"/>
-                    <Setter Property="FontFamily" Value="Bahnschrift"/>
-                    <Setter Property="FontSize" Value="18"/>
-                    <Setter Property="BorderThickness" Value="0"/>
-                    <Setter Property="Background" Value="#50577A"/>
-                    <Setter Property="Foreground" Value="PaleVioletRed"/>
-                    <Setter Property="Padding" Value="15,10,15,10"/>
-                </Style>
+                <Style TargetType="Button" BasedOn="{StaticResource ButtonBase}"/>
             </StackPanel.Resources>
             
             <Button Content="Refresh" Command="{Binding CoinsUpdate}"/>
@@ -41,29 +52,47 @@
         </StackPanel>
 
         <ListBox Name="CoinsListBox" ItemsSource="{Binding Coins}" SelectedItem="{Binding SelectedCoin}" 
-                 Background="#6B728E" Padding="10,5,10,10" HorizontalContentAlignment="Stretch" 
-                 ScrollViewer.CanContentScroll="False" Grid.Row="1" BorderThickness="0">
+                 Background="#6B728E" Padding="10,5,10,10" BorderThickness="0" Grid.Row="1"
+                 ScrollViewer.CanContentScroll="False" HorizontalContentAlignment="Stretch">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Margin="0,2,0,2" Background="#50577A">
-                        
-                        <StackPanel.Resources>
-                            <Style TargetType="TextBlock">
-                                <Setter Property="Margin" Value="10,0,0,5"/>
-                                <Setter Property="FontFamily" Value="Bahnschrift"/>
-                                <Setter Property="Foreground" Value="AntiqueWhite"/>
-                            </Style>
 
-                            <Style TargetType="Thumb">
-                                <Setter Property="MaxHeight" Value="5"/>
-                            </Style>
-                        </StackPanel.Resources>
+                        <TextBlock FontSize="22" Text="{Binding Path=name}" Style="{StaticResource TextBlockBase}"/>
 
-                        <TextBlock FontSize="22" Text="{Binding Path=name}"/>
-                        <TextBlock FontSize="15" Text="{Binding Path=rank, StringFormat='Rank : {0}'}"/>
-                        <TextBlock FontSize="15" Text="{Binding Path=symbol, StringFormat='Symbol : {0}'}"/>
-                        <TextBlock FontSize="15" Text="{Binding Path=priceUsd, StringFormat='Price (USD) : {0}'}"/>
-                    
+                        <Grid>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="2*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel>
+
+                                <StackPanel.Resources>
+                                    <Style TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}"/>
+                                </StackPanel.Resources>
+
+                                <TextBlock Text="Rank"/>
+                                <TextBlock Text="Symbol"/>
+                                <TextBlock Text="Price"/>
+
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="1">
+
+                                <StackPanel.Resources>
+                                    <Style TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}"/>
+                                </StackPanel.Resources>
+    
+                                <TextBlock Text="{Binding Path=rank}"/>
+                                <TextBlock Text="{Binding Path=symbol}"/>
+                                <TextBlock Text="{Binding Path=priceUsd, StringFormat='$ {0}'}"/>
+
+                            </StackPanel>
+
+                        </Grid>
+
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>

@@ -10,7 +10,8 @@
         Width="{Binding Source={x:Static SystemParameters.PrimaryScreenWidth}, Converter={conv:RatioConverter}, ConverterParameter='0.5'}"
         WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
-        WindowStyle="None" ResizeMode="NoResize">
+        WindowStyle="None" ResizeMode="NoResize" 
+        MouseLeftButtonDown="Window_MouseLeftButtonDown">
 
     <Window.DataContext>
         <vm:MainWindowViewModel/>
